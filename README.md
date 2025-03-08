@@ -1,32 +1,109 @@
-# ECE421-Project1
+Five Card Draw Poker (Rust + WebSocket)
 
-Requirements for Project 1:
+Overview
 
-Three Poker Game to implement:
-Poker Game #1: Standard five-card draw
-Poker Game #6: Badugi
-Poker Game #14: Texas Hold'em
+This project is a Five Card Draw Poker game implemented in Rust, featuring a WebSocket-based multiplayer system. Players can join from different devices, participate in betting rounds, and play a complete game of poker in real time.
 
-# Dealer Requirements:
+Features
 
-High-Level Server Functional Requirements (S-FRs)
-* S-FR-1: Support multiple poker variants as listed in Table 1.
-* S-FR-2: Betting may be supported 
-* S-FR-3: Track statistics for each player.
-* S-FR-4: Provide player statistics on request. 
-* S-FR-5: Support 2 to 10 players per game (unless a variant supports a single player).
-* S-FR-6: Use a standard deck of 52 cards, including jokers when required by the variant. (Done)
-* S-FR-7: Ensure players have unique identifiers (IDs). (Done)
-* S-FR-8: Number each game sequentially starting from zero (0).
-* S-FR-9: Allow the game numbering to be reset to zero (0).
-* S-FR-10: Resetting the game numbering must clear retained player information.
+Multiplayer Support: Players can join lobbies via WebSockets.
 
+Betting System: Supports check, call, raise, fold, and all-in actions.
 
-High-Level Server Performance Requirements (S-PRs)
-* S-PR-1: Support at least three poker variants from Table 1 (e.g., Five-Card Draw, Texas Hold'em, Badugi).
-* S-PR-2: Assume clients have infinite funds or betting tokens for simplicity.
-* S-PR-3: Ensure player statistics are tracked across at least 100 server instances.
-* S-PR-4: Ensure player statistics can be reported across at least 100 server instances.
-* S-PR-5: Enable statistics to be reported by player ID.
-* S-PR-6: Allow statistics to be reported for a given player by game number.
-* S-PR-7: Allow clients to request results even if they are not actively playing.
+Game Mechanics: Standard 5-card draw rules, including drawing and replacing cards.
+
+Lobby Management: Players can create, join, and list available lobbies.
+
+WebSocket Communication: Real-time messaging for game updates.
+
+Asynchronous Execution: Uses tokio for async networking.
+
+Installation
+
+Prerequisites
+
+Rust (latest stable version)
+
+Cargo package manager
+
+Setup
+
+Clone the repository:
+
+git clone <repository_url>
+cd five-card-draw-rust
+
+Build the project:
+
+cargo build --release
+
+Run the server:
+
+cargo run
+
+How to Play
+
+Start the server and connect via a WebSocket client.
+
+Join a lobby or create a new one.
+
+Players place bets and receive their initial 5 cards.
+
+Players can discard and replace up to 3 cards.
+
+Final betting round before the showdown.
+
+The winner is determined based on standard poker hand rankings.
+
+WebSocket Endpoints
+
+Endpoint
+
+Description
+
+/lobby/create
+
+Creates a new poker lobby
+
+/lobby/join
+
+Joins an existing lobby
+
+/lobby/list
+
+Lists available lobbies
+
+/game/bet
+
+Places a bet
+
+/game/draw
+
+Discards and draws new cards
+
+/game/showdown
+
+Determines the winner
+
+Technologies Used
+
+Rust: Core language
+
+Warp: Web framework for handling WebSockets
+
+Tokio: Asynchronous runtime
+
+SQLx (if applicable): Database for storing player data
+
+Future Enhancements
+
+Add an AI opponent for solo play
+
+Implement player authentication
+
+Add mobile-friendly UI using WebAssembly (Yew)
+
+License
+
+This project is licensed under the MIT License.
+
